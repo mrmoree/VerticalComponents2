@@ -1,6 +1,6 @@
 {
   "name": "@zooroyal/vert-dev-eslint-config",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "ESLINT configuration for vertical components",
   "main": ".eslintrc.js",
   "scripts": {

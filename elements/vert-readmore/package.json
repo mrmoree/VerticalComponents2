@@ -1,6 +1,6 @@
 {
   "name": "@zooroyal/vert-readmore",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "pritave": true,
   "description": "The Vertical Web Components readmore component",
   "keywords": [
@@ -20,7 +20,7 @@
   "author": "Oliver Kierepka <o.kierepka@zooroyal.de> (https://zooroyal.de)",
   "license": "MIT",
   "devDependencies": {
-    "@zooroyal/vert-dev-toolbox": "^0.0.8"
+    "@zooroyal/vert-dev-toolbox": "^0.0.9"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.6.3",
