@@ -1,0 +1,33 @@
+{
+  "name": "@zooroyal/vert-button",
+  "version": "0.0.1",
+  "pritave": true,
+  "description": "The Vertical Web Components button component",
+  "keywords": [
+    "vertical",
+    "webcomponents",
+    "button"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mrmoree/VerticalComponents2.git"
+  },
+  "main": "dist/vert.button.js",
+  "bugs": {
+    "url": "https://github.com/ZooRoyal/VerticalComponents2/issues"
+  },
+  "homepage": "https://github.com/ZooRoyal/VerticalComponents2#README",
+  "author": "Oliver Kierepka <o.kierepka@zooroyal.de> (https://zooroyal.de)",
+  "license": "MIT",
+  "devDependencies": {
+    "@zooroyal/vert-dev-toolbox": "file:../vert-dev-toolbox"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.6.3",
+    "@zooroyal/vert-theme-zooroyal": "file:../../themes/vert-theme-zooroyal"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "73607c32bb69b0d6f43240fa4bf05484f69b1d6a"
+}

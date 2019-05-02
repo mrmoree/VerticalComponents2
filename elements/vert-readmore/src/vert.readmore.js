@@ -3,7 +3,7 @@ tmpl.innerHTML = `
     <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css">
     <style>
         :host {
-            display: block;
+            
         }
         
         :host([hidden]) {
@@ -55,13 +55,13 @@ class VertReadmore extends HTMLElement {
         super();
 
         // Attach a shadow root to the element.
-        let shadowRoot = this.attachShadow({mode: 'open'});
-        shadowRoot.appendChild(tmpl.content.cloneNode(true));
+        let _shadowRoot = this.attachShadow({mode: 'open'});
+        _shadowRoot.appendChild(tmpl.content.cloneNode(true));
 
         // Setup a click listener on <vert-readmore> trigger with the class .readmore__trigger__js
-        let readmoreTrigger = shadowRoot.querySelector(".js-readmore__trigger");
-        readmoreTrigger.addEventListener('click', e => {
-            // Don't toggle readmore if it's disabled.
+        let $readmoreTrigger = _shadowRoot.querySelector(".js-readmore__trigger");
+        $readmoreTrigger.addEventListener('click', e => {
+            // Don't toggle readmore if element has attribute disabled.
             if (this.disabled) {
                 return;
             }
@@ -70,7 +70,7 @@ class VertReadmore extends HTMLElement {
 
     }
 
-    // A getter/setter for an show property.
+    // A getter/setter for show property.
     get show() {
         return this.hasAttribute('show');
     }
@@ -85,6 +85,20 @@ class VertReadmore extends HTMLElement {
         this.toggleReadMore();
     }
 
+    // A getter/setter for a disabled property.
+    get disabled() {
+        return this.hasAttribute('disabled');
+    }
+
+    set disabled(val) {
+        // Reflect the value of the disabled property as an HTML attribute.
+        if (val) {
+            this.setAttribute('disabled', '');
+        } else {
+            this.removeAttribute('disabled');
+        }
+    }
+
     /* Called every time the element is inserted into the DOM.
        Useful for running setup code, such as fetching resources
        or rendering. Generally, you should try to delay work until this time. */
@@ -92,6 +106,9 @@ class VertReadmore extends HTMLElement {
         console.log("the element is inserted into the DOM.");
         //this is the best time to load external data or just do
         //cool stuff with content
+
+        //TODO: elipsis the current readmore__content with (…) and put it infront of the readmore link
+
     }
 
     /*	Called every time the element is removed from the DOM. Useful
@@ -105,11 +122,16 @@ class VertReadmore extends HTMLElement {
         return ['show', 'disabled'];
     }
 
-    // Only called for the disabled and open attributes due to observedAttributes
+    // Only called for the disabled and show attributes due to observedAttributes
     attributeChangedCallback(name, oldValue, newValue) {
-        if (this.disabled) {
-            console.log("element is disabled");
+        console.log(name + " " + oldValue +  " " + newValue);
+        if (name === "disabled" && oldValue === false) {
+            this.setAttribute("tabindex", "-1");
+            this.setAttribute("aria-disabled", "true");
             return false;
+        }else {
+            this.setAttribute("tabindex", "0");
+            this.removeAttribute("aria-disabled");
         }
         if (this.show) {
             console.log("we read more");
@@ -118,20 +140,13 @@ class VertReadmore extends HTMLElement {
         }
     }
 
+    /**
+     * Toggle function toggles show attribute
+     */
     toggleReadMore() {
         this.toggleAttribute("show");
     }
 
-    /**
-     * Sometimes it's just nice to say hi.
-     *
-     * @param {string} greeting A positive greeting.
-     * @return {string} The full greeting.
-     */
-    sayHello(greeting) {
-        var response = greeting || 'Hello World!';
-        return 'vert-readmore says, ' + response;
-    }
 
 }
 

@@ -4,12 +4,11 @@ var path = require('path');
 module.exports = {
     mode:"development",
     name:"Vertical Web Components General Setup",
-    "env": "production",
+    env: "development",
     entry:'./src/index.js',
-    output:{
+    output: {
         filename:'[name].[contenthash].js',
-        path:path.resolve(__dirname,
-            'dist'),
+        path: path.resolve(__dirname, 'dist'),
         libraryTarget: "umd"
     },
 

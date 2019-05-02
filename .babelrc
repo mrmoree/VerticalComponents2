@@ -16,7 +16,9 @@
   "ignore": [
     "node_modules",
     "vert-dev-toolbox",
-    "*/test"
+    "*/test",
+    "*.test.js",
+    "*.spec.js"
   ],
   "plugins": [
     "syntax-dynamic-import"
