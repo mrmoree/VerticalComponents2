@@ -14,5 +14,11 @@
     "no-consecutive-blank-lines": false,
     "curly": false
   },
+  "linterOptions": {
+    "exclude": [
+      "node_modules/**/*.{j,t}s",
+      "**/node_modules/**/*.{j,t}s"
+    ]
+  },
   "rulesDirectory": []
 }

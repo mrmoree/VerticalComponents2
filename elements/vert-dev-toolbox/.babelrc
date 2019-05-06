@@ -4,7 +4,7 @@
       "@babel/preset-env",
       {
         "shippedProposals": true,
-        "modules": false,
+        "modules": "umd",
         "targets": {
           "browsers": [
             "last 2 versions"
@@ -15,7 +15,8 @@
   ],
   "ignore": [
     "node_modules",
-    "vert-dev-toolbox",
+    "bower_components",
+    "vert-dev-*",
     "*/test",
     "*.test.js",
     "*.spec.js"

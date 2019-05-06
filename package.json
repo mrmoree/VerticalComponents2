@@ -1,7 +1,7 @@
 {
   "name": "@zooroyal/vertical-components",
   "version": "0.0.1",
-  "pritave": true,
+  "private": true,
   "description": "Vertical Web Components",
   "keywords": [
     "vertical",
@@ -18,26 +18,32 @@
   "author": "Oliver Kierepka <o.kierepka@zooroyal.de> (https://zooroyal.de)",
   "license": "MIT",
   "devDependencies": {
-    "@zooroyal/vert-dev-toolbox": "^0.0.8"
+    "@zooroyal/vert-dev-toolbox": "^0.0.10"
   },
   "scripts": {
-    "test": "jest",
     "del-dist": "lerna exec --parallel -- del-cli dist",
     "prebuild": "yarn del-dist",
-    "start": "node catalog/dist",
     "bootstrap": "lerna bootstrap",
-    "lint": "eslint --cache --ignore-path .gitignore ./elements/*/src",
+    "lint:js": "eslint --config ./elements/vert-dev-toolbox/eslintrc.js --ignore-path elements/vert-dev-toolbox/.eslintignore --cache ./*/src",
+    "lint:ts": "eslint --config ./elements/vert-dev-toolbox/eslintrc.js --ignore-path elements/vert-dev-toolbox/.eslintignore --cache \"elements/**/*.ts\" \"test/**/*.ts\" \"scripts/**/*.ts\"",
+    "lint": "npm-run-all --parallel lint:*",
+    "fix:js": "eslint --config ./elements/vert-dev-toolbox/eslintrc.js --ignore-path elements/vert-dev-toolbox/.eslintignore --cache --fix ./*/src",
+    "fix:ts": "eslint --config ./elements/vert-dev-toolbox/eslintrc.js --ignore-path elements/vert-dev-toolbox/.eslintignore --cache --fix ./*/src/",
+    "fix": "npm-run-all --parallel fix:*",
     "dev": "concurrently \"yarn watch\" \"lerna run dev --stream\"",
     "build:babel": "lerna exec --ignore @zooroyal/vert-dev-* --parallel -- babel src -d dist --config-file ../../.babelrc --source-maps",
     "build:webpack": "lerna run build:webpack",
     "build": "yarn build:babel && yarn build:webpack",
+    "build:esmodules": "tsc --project ./elements/vert-dev-toolbox/tsconfig.json --module esnext --importHelpers",
+    "postinstall": "yarn bootstrap",
     "release": "yarn build && lerna publish",
-    "watch": "yarn build:babel -- -w",
+    "watch": "yarn build:babel -w",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d catalog/dist"
+    "pretest": "yarn run lint",
+    "test": "yarn run jest",
+    "test:watch": "yarn run jest --watch"
   },
   "npmClient": "yarn",
-  "private": true,
   "useWorkspaces": true,
   "workspaces": {
     "packages": [
@@ -46,15 +52,7 @@
     ],
     "nohoist": []
   },
-  "jest": {
-    "coverageThreshold": {
-      "global": {
-        "branches": 90,
-        "functions": 95,
-        "lines": 95,
-        "statements": 95
-      }
-    },
-    "collectCoverage": true
+  "dependencies": {
+    "yarn-run-all": "^3.1.1"
   }
 }
